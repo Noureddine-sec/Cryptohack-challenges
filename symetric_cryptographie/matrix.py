@@ -20,6 +20,11 @@ matrix = [
     [114, 105, 120, 125],
 ]
 
+
 add_round_key=[[99, 114, 121, 112], [116, 111, 123, 114], [48, 117, 110, 100], [107, 51, 121, 125]]
 print(matrix2bytes(matrix))
 print(matrix2bytes(add_round_key))
+
+
+text1="Bonjour tout le monde aujourd'hui, je travaille sur AES"
+print(bytes2matrix(text1))

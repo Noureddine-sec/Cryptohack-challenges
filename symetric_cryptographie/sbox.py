@@ -1,3 +1,4 @@
+
 s_box = (
     0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
     0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
@@ -45,19 +46,27 @@ state = [
 
 
 def sub_bytes(s, sbox=s_box):
-    
-    for i in range(len(s)):
+    for i in range (len(s)):
         for j in range (len(s)):
-            print(i,j)
-            val = hex(s[i][j])
-            print val
-            
-            # s[i].append(sbox[i][j])
+            s[i][j]=sbox[s[i][j]]
     return s
 
+def bytes2matrix(text):
+    """ Converts a 16-byte array into a 4x4 matrix.  """
+    return [list(text[i:i+4]) for i in range(0, len(text), 4)]
 
-        
+def matrix2bytes(matrix):
+    """ Converts a 4x4 matrix into a 16-byte array.  """
+    text=""
+    for i in range (0,len(matrix)):
+        for j in range (0, len(matrix[i])):
+            text=text + chr(matrix[i][j])
+            # print(chr(matrix[i][j]))
+    return text
+    # print(text)
 
 
-print(sub_bytes(state, sbox=inv_s_box))
+
+# print(sub_bytes(state, sbox=inv_s_box))
+print(matrix2bytes(sub_bytes(state, sbox=inv_s_box)))
 
